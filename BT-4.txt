@@ -1,0 +1,37 @@
+pragma solidity ^0.8.0;
+
+contract StudentData 
+{
+   
+    struct Student 
+	{
+        	uint256 id;
+        	string name;
+        	string department;
+    	}
+
+
+    Student[] public students;
+
+        function addStudent(uint256 _id, string memory _name, string memory _dept) external 
+	{
+        	students.push(Student(_id, _name, _dept));
+    	}
+
+      function getStudent(uint256 _id) external view returns (string memory, string memory) 
+	{
+        	for (uint i = 0; i < students.length; i++)
+		{
+            		if (students[i].id == _id) 
+			{
+                		return (students[i].name, students[i].department);
+        		}
+    		}
+        
+		return ("Not Found", "Not Found");
+	}
+	
+	fallback() external payable {}
+
+    	receive() external payable {}
+}
